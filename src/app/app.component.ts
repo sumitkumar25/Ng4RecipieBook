@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  routeRecipe:boolean = false;
+  routeRecipe = false;
 
   onRouteChange(route) {
-    this.routeRecipe = route.toUpperCase() == 'RECIPES' ? true : false;
+    this.routeRecipe = route.toUpperCase() === 'RECIPES' ? true : false;
   }
 }
