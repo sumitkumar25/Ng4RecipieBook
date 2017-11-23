@@ -1,5 +1,6 @@
-import { Component, OnInit,ElementRef,ViewChild,Output,EventEmitter } from '@angular/core';
-import {Ingrediant} from "../../common/ingrediant.model";
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Ingrediant } from '../../common/ingrediant.model';
+import { ShoppingService } from '../shopping.service';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -7,21 +8,21 @@ import {Ingrediant} from "../../common/ingrediant.model";
   styleUrls: ['./shopping-list-edit.component.css']
 })
 export class ShoppingListEditComponent implements OnInit {
-  @ViewChild('nameInput') nameRef:ElementRef
-  @ViewChild('amountInput') amountRef:ElementRef
-  @ViewChild('unitInput') unitRef:ElementRef
+  @ViewChild('nameInput') nameRef: ElementRef;
+  @ViewChild('amountInput') amountRef: ElementRef;
+  @ViewChild('unitInput') unitRef: ElementRef;
 
-  @Output() ingredientAdded = new EventEmitter<Ingrediant>();
-
-  constructor() {
+  constructor(private shoppingService: ShoppingService) {
   }
 
   ngOnInit() {
   }
 
   addItem() {
-    const ing = new Ingrediant(this.nameRef.nativeElement.value, this.amountRef.nativeElement.value, this.unitRef.nativeElement.value)
-    this.ingredientAdded.emit(ing);
+    if (this.nameRef.nativeElement.value && this.amountRef.nativeElement.value && this.unitRef.nativeElement.value) {
+      const ing = new Ingrediant(this.nameRef.nativeElement.value, this.amountRef.nativeElement.value, this.unitRef.nativeElement.value)
+      this.shoppingService.addIngredient(ing);
+    }
   }
 
   clearForm() {
