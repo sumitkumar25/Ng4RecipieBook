@@ -1,6 +1,5 @@
 import { Recipe } from './recipe.model';
 import { OnInit, Injectable } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { Ingrediant } from '../common/ingrediant.model';
 import { ShoppingService } from '../shopping/shopping.service';
 @Injectable()
@@ -17,7 +16,6 @@ export class RecipeService implements OnInit {
         'nacho is typically a noodle made from an unleavened dough' +
         'of a durum wheat flour mixed with water or eggs and formed' +
         'into sheets or various shapes, then cooked by boiling or baking';
-    recipeSelected = new EventEmitter<Recipe>();
     private rescipes: Recipe[] = [
         new Recipe('Italian Pasta', this.recADescription,
             'http://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/3/1/0/' +
