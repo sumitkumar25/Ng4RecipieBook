@@ -1,7 +1,7 @@
 /**
  * Created by sukumar on 14-10-2017.
  */
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component} from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,13 +11,4 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 export class HeaderComponent {
   title: 'Recipe Book';
-
-  @Output() routeEvent = new EventEmitter<string>();
-
-  filterView($event) {
-    const route = $event.target.innerText;
-    if (route && route.length) {
-      this.routeEvent.emit(route);
-    }
-  }
 }

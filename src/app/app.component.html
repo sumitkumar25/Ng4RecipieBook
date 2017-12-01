@@ -1,13 +1,2 @@
-<app-header (routeEvent)="onRouteChange($event)"></app-header>
-<div class="row">
-  <div class="col-xs-6" *ngIf="routeRecipe">
-    <h2>Recipe List</h2>
-    <app-recipes></app-recipes>
-  </div>
-  <div class="col-xs-6" *ngIf="!routeRecipe">
-    <h2>Shopping list</h2>
-    <app-shopping-list></app-shopping-list>
-  </div>
-</div>
-
-
+<app-header></app-header>
+<router-outlet></router-outlet>
