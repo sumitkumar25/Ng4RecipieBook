@@ -14,13 +14,15 @@ import { ShoppingService } from './shopping/shopping.service';
 import { AppRoutingModule } from './routing/app.routing.module';
 import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent, HeaderComponent, RecipeListComponent, RecipeItemComponent, ShoppingListComponent,
-    ShoppingListEditComponent, RecipesComponent, RecipeDetailComponent, DropdownDirectiveDirective, RecipeStartComponent, RecipeEditComponent
+    ShoppingListEditComponent, RecipesComponent, RecipeDetailComponent, DropdownDirectiveDirective,
+    RecipeStartComponent, RecipeEditComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule 
+    BrowserModule, AppRoutingModule, FormsModule
   ],
   providers: [ShoppingService],
   bootstrap: [AppComponent]
