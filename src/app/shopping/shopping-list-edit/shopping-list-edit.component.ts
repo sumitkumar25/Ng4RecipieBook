@@ -9,43 +9,46 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./shopping-list-edit.component.css']
 })
 export class ShoppingListEditComponent implements OnInit {
-  @ViewChild('shoppingList') shoppingListEditForm;
+  @ViewChild('shoppingList') ingridientForm;
   ingEditMode = false;
   ingEditId: number = null;
+  editedIngredient: Ingrediant;
 
   constructor(private shoppingService: ShoppingService) {
   }
 
   ngOnInit() {
     this.shoppingService.ingredientEdited.subscribe(
-      (ing: Ingrediant) => {
+      (index: number) => {
         this.ingEditMode = true;
-        // this.ingEditId = index;
-        this.shoppingListEditForm.setValue({
-          'name': ing.name,
-          'amount': ing.amount,
-          'unit': ing.unit
+        this.ingEditId = index;
+        this.editedIngredient = this.shoppingService.getIngredient(index);
+        this.ingridientForm.setValue({
+          'name': this.editedIngredient.name,
+          'amount': this.editedIngredient.amount,
+          'unit': this.editedIngredient.unit
         });
       }
     );
   }
-
-  addItem() {
-    // if (this.nameRef.nativeElement.value && this.amountRef.nativeElement.value && this.unitRef.nativeElement.value) {
-    //   const ing = new Ingrediant(this.nameRef.nativeElement.value, this.amountRef.nativeElement.value, this.unitRef.nativeElement.value)
-    //   this.shoppingService.addIngredient(ing);
-    // }
-  }
   shoppingListSubmit(shoppingList: NgForm) {
     const ing = new Ingrediant(shoppingList.value.name, shoppingList.value.amount, shoppingList.value.unit);
-    this.shoppingService.addIngredient(ing);
+    if (this.ingEditMode) {
+      this.shoppingService.updateIngredient(this.ingEditId, ing);
+    } else {
+      this.shoppingService.addIngredient(ing);
+    }
+
+    this.clearForm();
   }
 
   clearForm() {
-
+    this.ingridientForm.reset();
+    this.ingEditMode = false;
   }
 
   deleteItem() {
-
+    this.shoppingService.deleteItem(this.ingEditId);
+    this.clearForm();
   }
 }

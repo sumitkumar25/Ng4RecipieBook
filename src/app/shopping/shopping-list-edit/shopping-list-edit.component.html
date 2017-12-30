@@ -21,8 +21,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit" [disabled]="!shoppingList.valid">Add</button>
-                    <button class="btn btn-danger" type="button" (click)="deleteItem()">Delete</button>
+                    <button class="btn btn-success" type="submit" [disabled]="!shoppingList.valid">
+                        {{ingEditMode?'Update':'Add'}}</button>
+                    <button class="btn btn-danger" type="button" (click)="deleteItem()" *ngIf="ingEditMode">Delete</button>
                     <button class="btn btn-info" type="button" (click)="clearForm()">Clear</button>
                 </div>
             </div>
