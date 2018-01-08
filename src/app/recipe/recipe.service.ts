@@ -2,8 +2,10 @@ import { Recipe } from './recipe.model';
 import { OnInit, Injectable } from '@angular/core';
 import { Ingrediant } from '../common/ingrediant.model';
 import { ShoppingService } from '../shopping/shopping.service';
+import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class RecipeService implements OnInit {
+    recipeChanged = new Subject<Recipe[]>();
     recADescription: string = 'Also commonly used to refer to the variety of pasta dishes,' +
         'pasta is typically a noodle made from an unleavened dough' +
         'of a durum wheat flour mixed with water or eggs and formed' +
@@ -34,15 +36,38 @@ export class RecipeService implements OnInit {
     ngOnInit() {
 
     }
+    setRecipes(recipes: Recipe[]) {
+        this.rescipes = recipes;
+        this.recipeChanged.next(this.rescipes);
+    }
     getRecipes() {
         return this.rescipes.slice();
     }
     getRecipe(id: number) {
         return this.rescipes[id];
     }
+    addRecipe(recipe: Recipe) {
+        if (recipe) {
+            this.rescipes.push(recipe);
+            this.updateRecipeChanges();
+        }
+    }
+    updateRecipe(index: number, recipe: Recipe) {
+        if (index >= 0 && recipe) {
+            this.rescipes[index] = recipe;
+            this.updateRecipeChanges();
+        }
+    }
+    updateRecipeChanges() {
+        this.recipeChanged.next(this.rescipes.slice());
+    }
     ingredientToShoppingList(ingrediants: Ingrediant[]) {
         if (ingrediants.length) {
             this.shoppingService.addIngredients(ingrediants);
         }
+    }
+    deleteRecipe(index: number) {
+        this.rescipes.splice(index, 1);
+        this.updateRecipeChanges();
     }
 }

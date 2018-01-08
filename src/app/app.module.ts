@@ -14,7 +14,10 @@ import { ShoppingService } from './shopping/shopping.service';
 import { AppRoutingModule } from './routing/app.routing.module';
 import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecipeService } from './recipe/recipe.service';
+import { HttpModule } from '@angular/http';
+import { FirebaseServiceService } from './http/firebase-service.service';
 @NgModule({
   declarations: [
     AppComponent, HeaderComponent, RecipeListComponent, RecipeItemComponent, ShoppingListComponent,
@@ -22,9 +25,9 @@ import { FormsModule } from '@angular/forms';
     RecipeStartComponent, RecipeEditComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, FormsModule
+    BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpModule
   ],
-  providers: [ShoppingService],
+  providers: [ShoppingService, RecipeService,FirebaseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
