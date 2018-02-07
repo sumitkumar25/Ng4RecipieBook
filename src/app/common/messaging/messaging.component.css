@@ -1,0 +1,12 @@
+.message-handler-container {
+    margin-top: 10px;
+}
+
+.error-item {
+    background-color: rgba(215, 45, 45, 0.822);
+    color: white;
+    padding: 5px;
+    width: 100%;
+    word-break: keep-all;
+    border-radius: 5px;
+}

@@ -1,0 +1,8 @@
+<div class="message-handler-container">
+    <p *ngFor="let err of errors;let i =index" class="error-item">
+        {{err}}
+    </p>
+    <p *ngFor="let msg of messages;let j =index" class="message-item">
+        {{msg}}
+    </p>
+</div>

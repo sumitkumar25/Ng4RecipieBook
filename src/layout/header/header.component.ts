@@ -4,6 +4,7 @@
 import { Component } from '@angular/core';
 import { FirebaseServiceService } from '../../app/http/firebase-service.service';
 import { Response } from '@angular/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,11 +14,11 @@ import { Response } from '@angular/http';
 
 export class HeaderComponent {
   title: 'Recipe Book';
-  constructor(private storeService: FirebaseServiceService) {
+  constructor(private firebaseService: FirebaseServiceService, private router: Router) {
 
   }
   onSaveData() {
-    this.storeService.storeAllRecipes()
+    this.firebaseService.storeAllRecipes()
       .subscribe(
       (response: Response) => {
         console.log(response);
@@ -25,6 +26,12 @@ export class HeaderComponent {
       );
   }
   onFetchData() {
-    this.storeService.retrieveAllRecipes();
+    this.firebaseService.retrieveAllRecipes();
+  }
+  onLogOut() {
+    this.firebaseService.logout()
+      .then(() => {
+        this.router.navigate(['/signin']);
+      });
   }
 }

@@ -1,0 +1,17 @@
+.form-control.ng-invalid.ng-touched {
+    border-left: solid 2px red;
+}
+
+form {
+    position: relative;
+    margin: auto;
+    width: 400px;
+    height: 300px;
+    padding: 20px 10px 0;
+    border: solid 1px #dadada;
+    border-radius: 5px;
+}
+
+button:disabled {
+    color: black;
+}
