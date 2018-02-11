@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RecipeService } from '../recipe/recipe.service';
 import { Response } from '@angular/http/src/static_response';
 import { Recipe } from '../recipe/recipe.model';
@@ -10,16 +10,15 @@ export class FirebaseServiceService {
   private root = 'https://recipebook-1632a.firebaseio.com/';
   private recipesExt = 'recipes.json';
   authToken = '';
-  constructor(private http: Http, private recipeService: RecipeService) { }
+  constructor(private httpClient: HttpClient, private recipeService: RecipeService) { }
 
   storeAllRecipes() {
-    return this.http.put(this.root + this.recipesExt, this.recipeService.getRecipes() + '?auth=' + this.authToken);
+    return this.httpClient.put(this.root + this.recipesExt + '?auth=' + this.authToken, this.recipeService.getRecipes());
   }
   retrieveAllRecipes() {
-    this.http.get(this.root + this.recipesExt + '?auth=' + this.authToken)
+    this.httpClient.get<Recipe[]>(this.root + this.recipesExt + '?auth=' + this.authToken)
       .map(
-      (response: Response) => {
-        const recipes: Recipe[] = response.json();
+      (recipes) => {
         for (let recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];

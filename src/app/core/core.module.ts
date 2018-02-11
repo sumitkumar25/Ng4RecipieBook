@@ -11,13 +11,7 @@ import { HeaderComponent } from '../../layout/header/header.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    AuthenticationModule,
-    RecipeModuleModule,
-    ShoppingModuleModule,
     AppRoutingModule,
-    HttpModule,
-    RecipeRoutesModule,
     SharedModule,
   ],
   declarations: [

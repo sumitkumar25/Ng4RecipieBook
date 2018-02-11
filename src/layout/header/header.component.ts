@@ -22,6 +22,9 @@ export class HeaderComponent {
       .subscribe(
       (response: Response) => {
         console.log(response);
+      }, (err) => {
+        console.log("error saving recipes");
+        console.log(err);
       }
       );
   }
