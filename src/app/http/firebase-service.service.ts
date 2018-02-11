@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http/src/request';
+import { HttpClient, HttpParams, } from '@angular/common/http';
 import { RecipeService } from '../recipe/recipe.service';
-import { Response } from '@angular/http/src/static_response';
+import { Response } from '@angular/http/';
 import { Recipe } from '../recipe/recipe.model';
 import 'rxjs/Rx';
 import * as firebase from 'firebase';
@@ -13,7 +14,11 @@ export class FirebaseServiceService {
   constructor(private httpClient: HttpClient, private recipeService: RecipeService) { }
 
   storeAllRecipes() {
-    return this.httpClient.put(this.root + this.recipesExt + '?auth=' + this.authToken, this.recipeService.getRecipes());
+    return this.httpClient.put(this.root + this.recipesExt, this.recipeService.getRecipes(),
+      {
+        observe: 'events',
+        params: new HttpParams().set('auth', this.authToken)
+      });
   }
   retrieveAllRecipes() {
     this.httpClient.get<Recipe[]>(this.root + this.recipesExt + '?auth=' + this.authToken)

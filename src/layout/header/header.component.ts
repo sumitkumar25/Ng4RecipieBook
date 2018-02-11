@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
 import { FirebaseServiceService } from '../../app/http/firebase-service.service';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { HttpEvent } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,10 +22,12 @@ export class HeaderComponent {
   onSaveData() {
     this.firebaseService.storeAllRecipes()
       .subscribe(
-      (response: Response) => {
-        console.log(response);
+      (response: HttpEvent<any>) => {
+        if (response.type === HttpEventType.Response) {
+          console.log(response.body);
+        }
       }, (err) => {
-        console.log("error saving recipes");
+        console.log('error saving recipes');
         console.log(err);
       }
       );
