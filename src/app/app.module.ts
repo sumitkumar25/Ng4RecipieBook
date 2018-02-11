@@ -23,7 +23,6 @@ import { HttpClient } from 'selenium-webdriver/http';
     AuthenticationModule,
     AppRoutingModule
   ],
-  providers: [ShoppingService, RecipeService, FirebaseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -19,6 +19,11 @@ export class FirebaseServiceService {
         observe: 'events',
         params: new HttpParams().set('auth', this.authToken)
       });
+    // const request = new HttpRequest('PUT', this.root + this.recipesExt, this.recipeService.getRecipes(), {
+    //   reportProgress: true,
+    //   params: new HttpParams().set('auth', this.authToken)
+    // });
+    // return this.httpClient.request(request);
   }
   retrieveAllRecipes() {
     this.httpClient.get<Recipe[]>(this.root + this.recipesExt + '?auth=' + this.authToken)

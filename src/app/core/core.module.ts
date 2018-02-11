@@ -8,6 +8,11 @@ import { RecipeRoutesModule } from '../recipe/recipe-routes/recipe-routes.module
 import { SharedModule } from '../common/shared/shared.module';
 import { AuthenticationModule } from '../auth/authentication/authentication.module';
 import { HeaderComponent } from '../../layout/header/header.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../auth/auth.interceptor';
+import { ShoppingService } from '../shopping/shopping.service';
+import { RecipeService } from '../recipe/recipe.service';
+import { FirebaseServiceService } from '../http/firebase-service.service';
 
 @NgModule({
   imports: [
@@ -17,6 +22,11 @@ import { HeaderComponent } from '../../layout/header/header.component';
   declarations: [
     HeaderComponent
   ],
-  exports: [HeaderComponent, AppRoutingModule]
+  exports: [HeaderComponent, AppRoutingModule],
+  providers: [
+    ShoppingService,
+    RecipeService,
+    FirebaseServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]
 })
 export class CoreModule { }
